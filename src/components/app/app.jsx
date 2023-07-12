@@ -1,15 +1,48 @@
 import styles from "./app.module.css";
-import { data } from "../../utils/data";
+import AppHeader from "../app-header/app-header";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
+import { useState, useEffect } from "react";
+import { getApiData } from "../../utils/api/api";
+
 
 function App() {
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    getIngredients();
+  }, []);
+
+  function getIngredients() {
+    getApiData()
+      .then((res) => {
+        setIngredients(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div className={styles.app}>
-      <pre style={{
-      	margin: "auto",
-      	fontSize: "1.5rem"
-      }}>
-      	Измените src/components/app/app.jsx и сохраните для обновления.
-      </pre>
+      <AppHeader />
+      <main className={styles.main}>
+        <section className={styles.ingredients}>
+          <h1 className="text text_type_main-large">Соберите бургер</h1>
+          {ingredients.length && (
+            <BurgerIngredients
+            ingridients={ingredients} 
+            />
+          )}
+        </section>
+        <section className={styles.constructor}>
+          {ingredients.length && (
+            <BurgerConstructor
+            dataitem={ingredients} 
+            />
+          )}
+        </section>
+      </main>
     </div>
   );
 }
