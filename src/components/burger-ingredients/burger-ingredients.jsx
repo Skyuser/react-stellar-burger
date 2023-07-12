@@ -8,10 +8,10 @@ import { ingredientPropType } from "../../utils/prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-function BurgerIngredients({ ingridients }) {
-  const buns = useMemo(() => ingridients.filter((m) => m.type === "bun"), [ingridients]);
-  const sauces = useMemo(() => ingridients.filter((m) => m.type === "sauce"), [ingridients])
-  const fillings = useMemo(() => ingridients.filter((m) => m.type === "main"), [ingridients])
+function BurgerIngredients({ ingredients }) {
+  const buns = useMemo(() => ingredients.filter((m) => m.type === "bun"), [ingredients]);
+  const sauces = useMemo(() => ingredients.filter((m) => m.type === "sauce"), [ingredients])
+  const fillings = useMemo(() => ingredients.filter((m) => m.type === "main"), [ingredients])
   const [openIngredient, setOpenIngredient] = useState(false);
   const [dataIngredient, setDataIngredient] = useState(null);
   const [current, setCurrent] = useState("one");
@@ -36,10 +36,10 @@ function BurgerIngredients({ ingridients }) {
         <div className="pb-5">
           <h2 className="text text_type_main-medium pb-1" >Булки</h2>
           <ul className={`${ingredientsStyle.ingridientlist} pt-5`}>
-            {buns.map((ingridients) => (
-              <li key={ingridients._id}>
+            {buns.map((ingredients) => (
+              <li key={ingredients._id}>
                 <IngridientItem
-                  data={ingridients}
+                  data={ingredients}
                   openIngredient={handleOpenPopupIngredient}
                 />
               </li>
@@ -49,10 +49,10 @@ function BurgerIngredients({ ingridients }) {
         <div className="pt-5 pb-5">
           <h2 className="text text_type_main-medium pb-1" >Соусы</h2>
           <ul className={`${ingredientsStyle.ingridientlist} pt-5`}>
-            {sauces.map((ingridients) => (
-              <li key={ingridients._id}>
+            {sauces.map((ingredients) => (
+              <li key={ingredients._id}>
                 <IngridientItem
-                  data={ingridients}
+                  data={ingredients}
                   openIngredient={handleOpenPopupIngredient}
                 />
               </li>
@@ -62,10 +62,10 @@ function BurgerIngredients({ ingridients }) {
         <div className="pt-5 pb-5">
           <h2 className="text text_type_main-medium pb-1" >Начинки</h2>
           <ul className={`${ingredientsStyle.ingridientlist} pt-5`}>
-            {fillings.map((ingridients) => (
-              <li key={ingridients._id}>
+            {fillings.map((ingredients) => (
+              <li key={ingredients._id}>
                 <IngridientItem
-                  data={ingridients}
+                  data={ingredients}
                   openIngredient={handleOpenPopupIngredient}
                 />
               </li>
@@ -83,7 +83,7 @@ function BurgerIngredients({ ingridients }) {
 }
 
 BurgerIngredients.propTypes = {
-  ingridients: PropTypes.arrayOf(ingredientPropType ),
-};
+  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
+}
 
 export default BurgerIngredients;

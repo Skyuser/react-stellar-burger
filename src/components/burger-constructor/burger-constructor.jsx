@@ -3,16 +3,16 @@ import Modal from '../modal/modal';
 import PropTypes from "prop-types";
 import OrderDetails from '../order-details/order-details';
 import burgerconstructorStyles from './burger-constructor.module.css'
-import { burgerItemsTypes } from "../../utils/prop-types";
+import { ingredientPropType } from "../../utils/prop-types";
 import { ConstructorElement, 
         DragIcon, 
         Button, 
         CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 
-function BurgerConstructor({ dataitem }) {
+function BurgerConstructor({ data }) {
     const [active, setActive] = React.useState(false);
-    const buns = React.useMemo(() => dataitem.length > 0 && dataitem.find((m) => m.type === "bun"), [dataitem])
+    const buns = React.useMemo(() => data.length > 0 && data.find((m) => m.type === "bun"), [data])
 
 
     const popupSetClose = () => {
@@ -36,7 +36,7 @@ function BurgerConstructor({ dataitem }) {
                     thumbnail={buns.image}
                 /></div>
                 <ul className={`${burgerconstructorStyles.listitems}  custom-scroll`}>
-                    {dataitem.map((item) => {
+                    {data.map((item) => {
                         return item.type !== "bun" && (
                             <li key={item._id} className={burgerconstructorStyles.item}>
                                 <DragIcon type="primary" />
@@ -73,7 +73,7 @@ function BurgerConstructor({ dataitem }) {
 }
 
 BurgerConstructor.propTypes = {
-    dataitem: PropTypes.arrayOf(burgerItemsTypes.isRequired)
+    data: PropTypes.arrayOf(ingredientPropType.isRequired)
 }
 
 export default BurgerConstructor

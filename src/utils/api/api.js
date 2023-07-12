@@ -1,26 +1,17 @@
-  const settings = {
-    baseUrl: 'https://norma.nomoreparties.space/api/ingredients',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-  
-  const getApiData = () => {
-    return fetch(`${settings.baseUrl}`, {
-      method: 'GET',
-      headers: settings.headers,
-    })
-      .then(checkResponse)
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+const BASE_URL = "https://norma.nomoreparties.space/api/";
 
-  function checkResponse(res) { 
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  }
+const checkResponse = (res) => {
+  return res.ok ? res.json() : 
+  res.json().then((err) => Promise.reject(err));
+};
+
+const getApiData = () => {
+  return request('ingredients')
+}
+
+function request(endpoint, settings) {
+  return fetch(`${BASE_URL}${endpoint}`, settings)
+    .then(checkResponse)
+}
   
   export {getApiData}

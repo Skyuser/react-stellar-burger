@@ -1,12 +1,12 @@
 import styles from "./ingredient-details.module.css";
-import { ingridientDetailsPropType } from "../../utils/prop-types";
+import { ingredientPropType } from "../../utils/prop-types";
 
 
 const IngredientDetails = ({ingredient}) => {
   return (
     <>
       <img className='ml-30 mr-25' src={ingredient.image_large} alt={ingredient.name}/>
-      <p className='text text_type_main-medium mt-4' style={{textAlign: 'center'}} >{ingredient.name}</p>
+      <p className={`${styles.paragraph} text text_type_main-medium mt-4`}>{ingredient.name}</p>
       <ul className={styles.grid}>
         <li className={styles.numbers}>
           <p className='text text_type_main-default text_color_inactive'>Калории, ккал</p>
@@ -30,7 +30,7 @@ const IngredientDetails = ({ingredient}) => {
 };
 
 IngredientDetails.propTypes = {
-  ingredient: ingridientDetailsPropType.isRequired,
+  ingredient: ingredientPropType.isRequired,
 };
 
 export default IngredientDetails;

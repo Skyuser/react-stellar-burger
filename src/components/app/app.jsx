@@ -31,14 +31,14 @@ function App() {
           <h1 className="text text_type_main-large">Соберите бургер</h1>
           {ingredients.length && (
             <BurgerIngredients
-            ingridients={ingredients} 
+            ingredients={ingredients} 
             />
           )}
         </section>
         <section className={styles.constructor}>
           {ingredients.length && (
             <BurgerConstructor
-            dataitem={ingredients} 
+            data={ingredients} 
             />
           )}
         </section>
