@@ -38,7 +38,7 @@
     text-decoration: none;
     color: var(--text-primary-color);
     display: flex;
-    justify-items: center;
+    align-items: center;
 }
 
 .menu_first {

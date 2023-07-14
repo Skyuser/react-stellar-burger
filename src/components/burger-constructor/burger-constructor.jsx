@@ -11,16 +11,21 @@ import { ConstructorElement,
 
 
 function BurgerConstructor({ data }) {
-    const [active, setActive] = React.useState(false);
-    const buns = React.useMemo(() => data.length > 0 && data.find((m) => m.type === "bun"), [data])
+    const [isOrderDetailsOpen, setIsOrderDetailsOpen] = React.useState(false);
+    const { buns, ingredients } = React.useMemo(() => {
+        return {
+          buns: data.find(item => item.type === 'bun'),
+          ingredients: data.filter(item => item.type !== 'bun'),
+        };
+      }, [data]);
 
 
     const popupSetClose = () => {
-        setActive(false)
+        setIsOrderDetailsOpen(false)
     }
 
     const popupSetOpen = () => {
-        setActive(true)
+        setIsOrderDetailsOpen(true)
     }
 
 
@@ -64,7 +69,7 @@ function BurgerConstructor({ data }) {
                     Оформить заказ
                 </Button>
             </div>
-            {active && 
+            {isOrderDetailsOpen && 
             (<Modal close={popupSetClose}>
                 <OrderDetails  />
             </Modal>)}
